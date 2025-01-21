@@ -12,7 +12,7 @@ tabelas.CriarBaseDados()
 def home():
     return render_template("index.html")
 
-############################Rotas para aulnos
+############################Rotas para alunos
 @app.route('/aluno/adicionar',methods=["GET","POST"])
 def aluno_adicionar():
     return alunos.adicionar()

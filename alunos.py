@@ -87,7 +87,6 @@ def pesquisar():
     if request.method=="POST":
         nome = request.form.get("inome")
         ligacao_bd = basedados.criar_conexao("notas.bd")
-        #TODO: erro ao pesquisar
         sql = "SELECT * FROM Alunos WHERE nome like ?"
         nome = "%" + nome + "%"
         parametros=(nome,)
