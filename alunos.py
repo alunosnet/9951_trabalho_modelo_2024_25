@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect
 import basedados
+from datetime import datetime
 
 def adicionar():
     #se é um método GET enviar o form para preencher
@@ -19,6 +20,11 @@ def adicionar():
             return render_template("alunos/adicionar.html",mensagem="Nome não é válido. Deve ser preenchido com 3 letras no minimo e 100 no máximo.")
         if not morada:
             return render_template("alunos/adicionar.html",mensagem="A morada deve estar preenchida.")
+        #testar se o aluno tem pelo menos 6 anos de idade
+        data_nascimento = datetime.strptime(data_nasc,"%Y-%m-%d").date()
+        data_atual      = datetime.now()
+        if data_atual.year - data_nascimento.year<6:
+            return render_template("alunos/adicionar.html",mensagem="A data de nascimento não é válida.")
         #adicionar os dados à bd
         sql = "INSERT INTO Alunos(nome,morada,cp,data_nasc,email) VALUES (?,?,?,?,?)"
         parametros = (nome,morada,cp,data_nasc,email)
@@ -36,7 +42,7 @@ def apagar():
     nprocesso = request.form.get("nprocesso")
     #consulta à bd para recolher os dados do aluno
     sql = "SELECT * FROM Alunos WHERE nprocesso=?"
-    parametros =(nprocesso)
+    parametros =(nprocesso,)
     ligacao_bd=basedados.criar_conexao("notas.bd")
     dados = basedados.consultar_sql(ligacao_bd,sql,parametros)
     return render_template("alunos/apagar.html",registo = dados[0])
@@ -45,7 +51,7 @@ def apagar_confirmado():
     nprocesso = request.form.get("nprocesso")
     ligacao_bd=basedados.criar_conexao("notas.bd")
     sql="DELETE FROM Alunos WHERE nprocesso=?"
-    parametros=(nprocesso)
+    parametros=(nprocesso,)
     basedados.executar_sql(ligacao_bd,sql,parametros)
     return redirect("/aluno/listar")
 
@@ -53,7 +59,7 @@ def editar():
     nprocesso = request.form.get("nprocesso")
     #consulta à bd para recolher os dados do aluno
     sql = "SELECT * FROM Alunos WHERE nprocesso=?"
-    parametros =(nprocesso)
+    parametros =(nprocesso,)
     ligacao_bd=basedados.criar_conexao("notas.bd")
     dados = basedados.consultar_sql(ligacao_bd,sql,parametros)
     return render_template("alunos/editar.html",registo = dados[0])
@@ -63,7 +69,7 @@ def editar_confirmado():
     #criar uma ligação à bd
     ligacao_bd=basedados.criar_conexao("notas.bd")
     sql = "SELECT * FROM Alunos WHERE nprocesso=?"
-    parametros =(nprocesso)
+    parametros =(nprocesso,)
     dados = basedados.consultar_sql(ligacao_bd,sql,parametros)
     #validar os dados
     nome      = request.form.get("inome")
