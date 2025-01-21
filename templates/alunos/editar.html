@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Editar aluno</h1>
+<form action="/aluno/editar_confirmado" method="POST">
+    <label for ="inome">Nome:</label>
+    <input type="text" name="inome" id="inome" required class="form-control" placeholder="Nome do aluno" value="{{ registo['nome'] }}" />
+    <br>
+    <label for="imorada">Morada:</label>
+    <input type="text" name="imorada" id="imorada" required class="form-control" placeholder="Morada do aluno" value="{{ registo['morada'] }}"/>
+    <br>
+    <label for="icp">Código Postal:</label>
+    <input type="text" name="icp" id="icp" required class="form-control" placeholder="Código Postal da morada" value="{{registo['cp']}}" />
+    <br>
+    <label for="idata_nasc">Data de nascimento:</label>
+    <input type="date" name="idata_nasc" id="idata_nasc" required class="form-control" value="{{ registo['data_nasc'] }}" />
+    <br>
+    <label for="iemail">Email:</label>
+    <input type="email" name="iemail" id="iemail" required class="form-control" value="{{registo['email']}}"/>
+    <br>
+    <input type="hidden" value="{{registo['nprocesso']}}" name="nprocesso" />
+    <input type="submit" value="Atualizar" class="btn btn-lg btn-danger" />
+    <a href="/aluno/listar" class="btn btn-primary">Voltar</a>
+    {{ mensagem }}
+</form>
+{% endblock %}
