@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Adicionar disciplina</h1>
+<form action="/disciplina/adicionar" method="POST">
+    <label for ="inome">Nome:</label>
+    <input type="text" name="inome" id="inome" required class="form-control" placeholder="Nome da disciplina" />
+    <br>
+    <label for="iano">Ano:</label>
+    <input type="number" name="iano" id="iano" required class="form-control" placeholder="Ano da disciplina" />
+    <br>
+    <label for="inr_modulos">Nr de módulos:</label>
+    <input type="number" name="inr_modulos" id="inr_modulos" required class="form-control" placeholder="Nr de módulos da disciplina" />
+    <br>
+    <label for="inr_horas">Nr de horas:</label>
+    <input type="number" name="inr_horas" id="inr_horas" required class="form-control" />
+    <br>
+    <label for="imax_faltas">Máximo nr de faltas:</label>
+    <input type="number" name="imax_faltas" id="imax_faltas" required class="form-control" />
+    <br>
+    <input type="submit" value="Adicionar" class="btn btn-lg btn-danger" />
+    {{ mensagem }}
+</form>
+{% endblock %}
