@@ -62,6 +62,11 @@
         {% endblock %}
     </div>
     <!--Rodapé-->
-    <footer>Este site utiliza cookies</footer>
+    {% if not request.cookies.get("aviso") %}
+    <form method="post" action="/aceitar_cookies">
+      <footer>Este site utiliza cookies</footer>
+      <input type="submit" value="Aceitar" class="btn btn-primary" />
+    </form>
+    {% endif %}
 </body>
 </html>

@@ -60,3 +60,14 @@ def listar():
     """
     dados = basedados.consultar_sql(ligacao_bd,sql)
     return render_template("notas/listar.html",registos=dados)
+
+def mediaporaluno():
+    """Função devolve a lista das médias das notas por aluno"""
+    sql = """SELECT AVG(nota) as media,alunos.nome as NomeAluno 
+            FROM Notas
+            INNER JOIN alunos ON notas.nprocesso=alunos.nprocesso
+            GROUP BY Notas.nprocesso
+            ORDER BY AVG(nota) DESC"""
+    ligacao_bd=basedados.criar_conexao("notas.bd")
+    medias = basedados.consultar_sql(ligacao_bd,sql)
+    return medias

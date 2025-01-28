@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 import tabelas
 import alunos, disciplinas, notas
 
@@ -10,7 +10,8 @@ tabelas.CriarBaseDados()
 #Rotas
 @app.route("/")
 def home():
-    return render_template("index.html")
+    medias=notas.mediaporaluno()
+    return render_template("index.html",medias=medias)
 
 ############################Rotas para alunos
 @app.route('/aluno/adicionar',methods=["GET","POST"])
@@ -60,11 +61,21 @@ def nota_listar():
 def sobre():
     return render_template("sobre.html")
 
-@app.route("/aceitar_cookies",methods="POST")
+@app.route("/aceitar_cookies",methods=["POST"])
 def aceitar_cookies():
     resposta = make_response(redirect("/"))
     resposta.set_cookie("aviso","aceitou",max_age=30*24*60*60)
-    return resposta #TODO: continuar aqui (falta o importa e falta o código layout)
+    return resposta
+
+################################################
+#Rotas dos erros
+@app.errorhandler(404)
+def erro_404(evento):
+    return render_template("404.html")
+
+@app.errorhandler(500)
+def erro_500(evento):
+    return render_template("404.html")
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True) #para entrar em produção mudar para False

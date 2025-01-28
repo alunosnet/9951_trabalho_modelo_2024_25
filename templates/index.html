@@ -5,4 +5,18 @@
 <!--Logo da escola-->
 <img src="/static/imagens/logo.jpg" alt="Logo da escola" class="rounded img-fluid" />
 
+<!--Média das notas por aluno-->
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Média</th>
+    </tr>
+    {% for aluno in medias %}
+    <tr>
+        <th>{{ aluno['NomeAluno'] }}</th>
+        <th>{{ aluno['media'] }}</th>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}
