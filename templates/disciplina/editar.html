@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Editar disciplina</h1>
+
+<form method="post" action="/disciplina/editar_confirmado">
+    <input type="hidden" name="codigo" value="{{registo['codigo']}}" />
+    <label for="input_nome">Nome:</label>
+    <input value="{{registo['nome']}}" type="text" name="input_nome" id="input_nome" required class="form-control" />
+    <br>
+    <label for="input_ano">Ano:</label>
+    <input value="{{registo['ano']}}" type="number" name="input_ano" id="input_ano" class="form-control" />
+    <br>
+    <label for="input_nr_modulos">Nº de  módulos:</label>
+    <input value="{{registo['nr_modulos']}}" type="number" name="input_nr_modulos" id="input_nr_modulos" class="form-control" />
+    <br>
+    <label for="input_nr_horas">Nº de horas:</label>
+    <input value="{{registo['nr_horas']}}" type="number" name="input_nr_horas" id="input_nr_horas" required class="form-control" />
+    <br>
+    <label for="input_max_faltas">Máximo de faltas:</label>
+    <input value="{{registo['max_faltas']}}" type="number" name="input_max_faltas" id="input_max_faltas" required class="form-control" />
+    <br>
+    <input type="submit" value="Atualizar" class="btn btn-lg btn-danger"/>
+    <br>
+    <a href="/disciplina/listar" class="btn btn-info">Voltar</a>
+    <br>
+    {{ mensagem }}
+</form>
+
+{% endblock %}

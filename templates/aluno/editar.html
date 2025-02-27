@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Editar aluno</h1>
+
+<form method="post" action="/aluno/editar_confirmado" enctype="multipart/form-data">
+    <input type="hidden" name="nprocesso" value="{{ registo['nprocesso']}}" >
+    <label for="input_nome">Nome:</label>
+    <input value="{{ registo['nome'] }}" type="text" name="input_nome" id="input_nome" required class="form-control" />
+    <br>
+    <label for="input_morada">Morada:</label>
+    <input value="{{ registo['morada'] }}" type="text" name="input_morada" id="input_morada" class="form-control" />
+    <br>
+    <label for="input_cp">Código Postal:</label>
+    <input value="{{ registo['cp'] }}" type="text" name="input_cp" id="input_cp" class="form-control" />
+    <br>
+    <label for="input_data">Data Nascimento:</label>
+    <input value="{{ registo['data_nasc'] }}" type="date" name="input_data" id="input_data" required class="form-control" />
+    <br>
+    <label for="input_email">Email:</label>
+    <input value="{{ registo['email'] }}" type="email" name="input_email" id="input_email" required class="form-control" />
+    <br>
+    <label for="input_fotografia">Fotografia:</label>
+    <input type="file" name="input_fotografia" id="input_fotografia" class="form-control" />
+    <input type="submit" value="Atualizar" class="btn btn-lg btn-danger"/>
+    <a href="/aluno/listar" class="btn btn-info">Voltar</a>
+    <br>
+    {{ mensagem }}
+</form>
+
+{% endblock %}

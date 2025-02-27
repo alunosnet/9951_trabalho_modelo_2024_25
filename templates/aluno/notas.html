@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Notas de {{ aluno['nome'] }}</h1>
+<table class="table">
+    <tr>
+        <th>Disciplina</th>
+        <th>Módulo</th>
+        <th>Nota</th>
+    </tr>
+    {% for registo in notas %}
+        <tr>
+            <td>{{ registo["NomeDisciplina"] }}</td>
+            <td>{{ registo["modulo"] }}</td>
+            <td>{{ registo["nota"] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

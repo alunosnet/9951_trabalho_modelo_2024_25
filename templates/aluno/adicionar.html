@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Adicionar aluno</h1>
+
+<form method="post" action="/aluno/adicionar">
+    <label for="input_nome">Nome:</label>
+    <input type="text" name="input_nome" id="input_nome" required class="form-control" />
+    <br>
+    <label for="input_morada">Morada:</label>
+    <input type="text" name="input_morada" id="input_morada" class="form-control" />
+    <br>
+    <label for="input_cp">Código Postal:</label>
+    <input type="text" name="input_cp" id="input_cp" class="form-control" />
+    <br>
+    <label for="input_data">Data Nascimento:</label>
+    <input type="date" name="input_data" id="input_data" required class="form-control" />
+    <br>
+    <label for="input_email">Email:</label>
+    <input type="email" name="input_email" id="input_email" required class="form-control" />
+    <br>
+    <input type="submit" value="Adicionar" class="btn btn-lg btn-danger"/>
+    <br>
+    {{ mensagem }}
+</form>
+
+{% endblock %}

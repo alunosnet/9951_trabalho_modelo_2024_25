@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Adicionar nota</h1>
+
+<form method="post" action="/nota/adicionar">
+
+    <label for="nprocesso">Nome aluno:</label>
+    <select name="nprocesso" class="form-select">
+        {% for aluno in alunos %}
+            <option value="{{ aluno['nprocesso'] }}">{{ aluno['nome']}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="codigo_disciplina">Disciplina:</label>
+    <select name="codigo_disciplina" class="form-select">
+        {% for disciplina in disciplinas %}
+            <option value="{{ disciplina['codigo'] }}">{{ disciplina['nome']}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="input_nota">Nota:</label>
+    <input type="number" name="input_nota" id="input_nota" class="form-control" />
+    <br>
+    <label for="input_data">Data Nota:</label>
+    <input type="date" name="input_data" id="input_data" required class="form-control" />
+    <br>
+    <label for="input_modulo">Módulo:</label>
+    <input type="number" name="input_modulo" id="input_modulo" required class="form-control" />
+    <br>
+    <label for="input_ano">Ano:</label>
+    <input type="number" name="input_ano" id="input_ano" required class="form-control" />
+    <br>
+    <input type="submit" value="Adicionar" class="btn btn-lg btn-danger"/>
+    <br>
+    {{ mensagem }}
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+# Ignorar arquivos de byte Python
+*.pyc
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos de banco de dados SQLite
+*.db
+
+# Ignorar arquivos e pastas gerados pelo IDE
+.vscode/
+.idea/
+
+# Ignorar pastas geradas pelo servidor web
+__pycache__/

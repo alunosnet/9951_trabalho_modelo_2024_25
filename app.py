@@ -1,81 +1,115 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, make_response, redirect
+import basedados
+import aluno
+import disciplina
 import tabelas
-import alunos, disciplinas, notas
+import nota
 
 app = Flask(__name__)
 
-#criar base de dados
-tabelas.CriarBaseDados()
-
 #Rotas
-@app.route("/")
+@app.route('/')
 def home():
-    medias=notas.mediaporaluno()
-    return render_template("index.html",medias=medias)
+    return render_template('index.html')
 
-############################Rotas para alunos
+@app.route('/aceitar_cookies',methods=['POST'])
+def aceitar_cookies():
+    resposta = make_response(redirect("/"))
+    #cookie com prazo de validade de 30 dias
+    resposta.set_cookie('aviso','aceitou',max_age=30*24*60*60)
+    return resposta
+
+# Rotas do aluno
 @app.route('/aluno/adicionar',methods=["GET","POST"])
 def aluno_adicionar():
-    return alunos.adicionar()
+    return aluno.aluno_adicionar()
 
-@app.route("/aluno/listar")
+@app.route('/aluno/listar')
 def aluno_listar():
-    return alunos.listar()
+    return aluno.aluno_listar()
 
-@app.route("/aluno/apagar",methods=["POST"])
-def aluno_apagar():
-    return alunos.apagar()
-
-@app.route("/aluno/apagar_confirmado",methods=["POST"])
-def aluno_apagar_confirmado():
-    return alunos.apagar_confirmado()
-
-@app.route("/aluno/editar",methods=["POST"])
-def aluno_editar():
-    return alunos.editar()
-
-@app.route("/aluno/editar_confirmado",methods=["POST"])
-def aluno_editar_confirmado():
-    return alunos.editar_confirmado()
-
-@app.route("/aluno/pesquisar",methods=["GET","POST"])
+@app.route('/aluno/pesquisar',methods=["GET","POST"])
 def aluno_pesquisar():
-    return alunos.pesquisar()
+    return aluno.aluno_pesquisar()
 
-########################################Rotas das disciplinas
-@app.route("/disciplina/adicionar",methods=["GET","POST"])
+@app.route('/aluno/apagar',methods=["POST"])
+def aluno_apagar():
+    return aluno.aluno_apagar()
+
+@app.route('/aluno/apagar_confirmado',methods=["POST"])
+def aluno_apagar_confirmado():
+    return aluno.aluno_apagar_confirmado()
+
+@app.route('/aluno/editar',methods=["POST"])
+def aluno_editar():
+    return aluno.aluno_editar()
+
+@app.route('/aluno/editar_confirmado',methods=["POST"])
+def aluno_editar_confirmado():
+    return aluno.aluno_editar_confirmado()
+
+#rota com query string
+@app.route('/aluno/listar_notas/<nprocesso>')
+def aluno_listar_notas(nprocesso):
+    return aluno.aluno_listar_notas(nprocesso)
+
+#Rotas das disciplinas
+#################################################################
+@app.route('/disciplina/adicionar',methods=["GET","POST"])
 def disciplina_adicionar():
-    return disciplinas.adicionar()
+    return disciplina.disciplina_adicionar()
 
-#############################################Rotas das notas
-@app.route("/nota/adicionar",methods=["GET","POST"])
+@app.route('/disciplina/listar')
+def disciplina_listar():
+    return disciplina.disciplina_listar()
+
+@app.route('/disciplina/apagar',methods=["POST"])
+def disciplina_apagar():
+    return disciplina.disciplina_apagar()
+
+@app.route('/disciplina/apagar_confirmado',methods=["POST"])
+def disciplina_apagar_confirmado():
+    return disciplina.disciplina_apagar_confirmado()
+
+@app.route('/disciplina/editar',methods=["POST"])
+def disciplina_editar():
+    return disciplina.disciplina_editar()
+
+@app.route('/disciplina/editar_confirmado',methods=["POST"])
+def disciplina_editar_confirmado():
+    return disciplina.disciplina_editar_confirmado()
+
+#Rotas das notas
+################################################################
+@app.route('/nota/adicionar',methods=["GET","POST"])
 def nota_adicionar():
-    return notas.adicionar()
+    return nota.nota_adicionar()
 
 @app.route("/nota/listar")
 def nota_listar():
-    return notas.listar()
+    return nota.nota_listar()
 
-#####################################################
-@app.route("/sobre")
-def sobre():
-    return render_template("sobre.html")
+@app.route('/nota/apagar',methods=["POST"])
+def nota_apagar():
+    return nota.nota_apagar()
 
-@app.route("/aceitar_cookies",methods=["POST"])
-def aceitar_cookies():
-    resposta = make_response(redirect("/"))
-    resposta.set_cookie("aviso","aceitou",max_age=30*24*60*60)
-    return resposta
+@app.route('/nota/apagar_confirmado',methods=["POST"])
+def nota_apagar_confirmado():
+    return nota.nota_apagar_confirmado()
 
-################################################
-#Rotas dos erros
+@app.route('/nota/editar',methods=["POST"])
+def nota_editar():
+    return nota.nota_editar()
+
+@app.route('/nota/editar_confirmado',methods=["POST"])
+def nota_editar_confirmado():
+    return nota.nota_editar_confirmado()
+
+#Rotas de erros
+#################################################################
 @app.errorhandler(404)
 def erro_404(evento):
     return render_template("404.html")
 
-@app.errorhandler(500)
-def erro_500(evento):
-    return render_template("404.html")
-
-if __name__=="__main__":
-    app.run(debug=True) #para entrar em produção mudar para False
+if __name__ == "__main__":
+    app.run(debug=True)

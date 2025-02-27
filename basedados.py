@@ -20,7 +20,6 @@ def executar_sql(conexao, comando_sql, parametros=None):
         else:
             cursor.execute(comando_sql)
         conexao.commit()
-        cursor.close()
         print("Comando SQL executado com sucesso")
     except sqlite3.Error as e:
         print(f"Erro ao executar o comando SQL: {e}")

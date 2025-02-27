@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <form method="POST" action="/disciplina/apagar_confirmado">
+        <h2>Confirma que pretende remover esta disciplina?</h2>
+        <br>
+        {{ registo["nome"] }} <br>
+        {{ registo["ano"] }}
+        <br>
+        <input type="hidden" name="codigo" value="{{ registo['codigo'] }}">
+        <input type="submit" value="Confirmar" class="btn btn-danger"><br>
+        <a href="/disciplina/listar" class="btn btn-info">Voltar</a> 
+    </form>
+
+{% endblock %}

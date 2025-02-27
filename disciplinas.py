@@ -20,7 +20,7 @@ def adicionar():
         if not nome or len(nome)<2 or len(nome)>100:
             return render_template("disciplinas/adicionar.html",mensagem="Nome não é válido. Deve ser preenchido com 2 letras no minimo e 100 no máximo.")
         iano=int(ano)
-        if iano<10 or iano>12:
+        if iano<1 or iano>12:
             return render_template("disciplinas/adicionar.html",mensagem="O ano dever ser 10, 11 ou 12.")
         
         #adicionar os dados à bd

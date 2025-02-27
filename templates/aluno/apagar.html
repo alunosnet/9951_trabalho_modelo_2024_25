@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <form method="POST" action="/aluno/apagar_confirmado">
+        <h2>Confirma que pretende remover este aluno?</h2>
+        <br>
+        {{ registo["nome"] }} <br>
+        {{ registo["email"] }}
+        <br>
+        <input type="hidden" name="nprocesso" value="{{ registo['nprocesso'] }}">
+        <input type="submit" value="Confirmar" class="btn btn-danger"><br>
+        <a href="/aluno/listar" class="btn btn-info">Voltar</a> 
+    </form>
+
+{% endblock %}

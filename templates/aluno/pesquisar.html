@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Pesquisa de alunos</h1>
+
+<form method="post" action="/aluno/pesquisar">
+    <label for="nome">Nome:</label><input type="text" id="nome" name="nome" placeholder="Nome do aluno a pesquisar" class="form-control">
+    <input class="btn btn-info" type="submit" value="Pesquisa">
+</form>
+
+<table class="table">
+    <tr>
+        <th>Nº Processo</th>
+        <th>Nome</th>
+        <th>Morada</th>
+        <th>Código Postal</th>
+        <th>Data Nascimento</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    {% for registo in registos %}
+        <tr>
+            <td>{{ registo["nprocesso"] }}</td>
+            <td>{{ registo["nome"] }}</td>
+            <td>{{ registo["morada"] }}</td>
+            <td>{{ registo["cp"] }}</td>
+            <td>{{ registo["data_nasc"] }}</td>
+            <td>{{ registo["email"] }}</td>
+            <td>
+                <a href="/aluno/listar_notas/{{ registo['nprocesso'] }}">Detalhes...</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <form method="POST" action="/nota/apagar_confirmado">
+        <h2>Confirma que pretende remover esta nota?</h2>
+        <br>
+        Nome do aluno:{{ registo['NomeAluno']}}
+        <br>
+        Nota:{{ registo["nota"] }} 
+        <br>
+        Módulo: {{ registo["modulo"] }}
+        <br>
+        <input type="hidden" name="codigo" value="{{ registo['codigo'] }}">
+        <input type="submit" value="Confirmar" class="btn btn-danger"><br>
+        <a href="/nota/listar" class="btn btn-info">Voltar</a> 
+    </form>
+
+{% endblock %}

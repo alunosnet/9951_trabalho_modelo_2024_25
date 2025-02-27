@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Lista de alunos</h1>
+<table class="table">
+    <tr>
+        <th>Nº Processo</th>
+        <th>Nome</th>
+        <th>Morada</th>
+        <th>Código Postal</th>
+        <th>Data Nascimento</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for registo in registos %}
+        <tr>
+            <td>{{ registo["nprocesso"] }}</td>
+            <td>{{ registo["nome"] }}</td>
+            <td>{{ registo["morada"] }}</td>
+            <td>{{ registo["cp"] }}</td>
+            <td>{{ registo["data_nasc"] }}</td>
+            <td>{{ registo["email"] }}</td>
+            <td>
+                <form method="post" action="/aluno/apagar">
+                    <input type="hidden" name="nprocesso" value="{{ registo['nprocesso'] }}" />
+                    <input type="submit" value="Apagar" class="btn btn-danger">
+                </form>
+            </td>
+            <td>
+                <form method="post" action="/aluno/editar">
+                    <input type="hidden" name="nprocesso" value="{{ registo['nprocesso'] }}" />
+                    <input type="submit" value="Editar" class="btn btn-info">
+                </form>
+            </td>
+
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
